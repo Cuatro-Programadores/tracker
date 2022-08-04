@@ -63,39 +63,39 @@ class Scraper:
             print(float(actual_price[0]))
             return (float(actual_price[0]))
 
-    def scrape_walmart(self, url):
+    # def scrape_walmart(self, url):
 
-        URL = url
+    #     URL = url
 
-        options = Options()
-        options.add_argument("start-maximized")
-        driver = webdriver.Chrome(service=Service(
-            ChromeDriverManager().install()), options=options)
-        driver.get(URL)
-        page = driver.page_source
-        driver.close()
+    #     options = Options()
+    #     options.add_argument("start-maximized")
+    #     driver = webdriver.Chrome(service=Service(
+    #         ChromeDriverManager().install()), options=options)
+    #     driver.get(URL)
+    #     page = driver.page_source
+    #     driver.close()
 
-        finds = re.findall(
-            r'submapType\"\:null},\"currentPrice\"\:{\"price\"\:\d+(?:\.\d+)?', page)
+    #     finds = re.findall(
+    #         r'submapType\"\:null},\"currentPrice\"\:{\"price\"\:\d+(?:\.\d+)?', page)
 
-        item_found = []
+    #     item_found = []
 
-        for find in finds:
-            item_found.append(find)
+    #     for find in finds:
+    #         item_found.append(find)
 
-        if item_found is None:
-            actual_price = "Price not available"
-            return actual_price
-        else:
-            actual_price = re.findall(r'\d+(?:\.\d+)?', item_found[0])
-            print(float(actual_price[0]))
-            return (float(actual_price[0]))
+    #     if item_found is None:
+    #         actual_price = "Price not available"
+    #         return actual_price
+    #     else:
+    #         actual_price = re.findall(r'\d+(?:\.\d+)?', item_found[0])
+    #         print(float(actual_price[0]))
+    #         return (float(actual_price[0]))
 
 
-if __name__ == "__main__":
-    scraper = Scraper()
-    scraper.scrape_amazon(
-        'https://www.amazon.com/APC-Battery-Protector-BackUPS-BX1500M/dp/B06VY6FXMM?ref_=Oct_DLandingS_D_d1d1e0d6_60&smid=ATVPDKIKX0DER&th=1')
+# if __name__ == "__main__":
+#     scraper = Scraper()
+#     scraper.scrape_amazon(
+#         'https://www.amazon.com/APC-Battery-Protector-BackUPS-BX1500M/dp/B06VY6FXMM?ref_=Oct_DLandingS_D_d1d1e0d6_60&smid=ATVPDKIKX0DER&th=1')
     # Scraper.scrape_amazon(
     #     'https://www.amazon.com/dp/B07VHZ41L8?ref_=nav_em__k_ods_ha_ta_0_2_4_6')
     # Scraper.scrape_amazon(
@@ -107,8 +107,8 @@ if __name__ == "__main__":
     # Scraper.scrape_amazon(
     #     'https://www.amazon.com/Napkins-Lucheon-Beverage-Guest-BIrthday/dp/B00JBG31KK/ref=sr_1_2?crid=258BO8L7ZNNWE&keywords=napkins&qid=1659396596&sprefix=napkins%2Caps%2C186&sr=8-2')
 
-    scraper.scrape_target(
-        'https://www.target.com/p/hisense-55-34-class-a6g-series-4k-uhd-android-smart-tv-55a6g/-/A-82802681#lnk=sametab')
+    # scraper.scrape_target(
+    #     'https://www.target.com/p/hisense-55-34-class-a6g-series-4k-uhd-android-smart-tv-55a6g/-/A-82802681#lnk=sametab')
     # Scraper.scrape_target(
     #     '``')
     # Scraper.scrape_target(

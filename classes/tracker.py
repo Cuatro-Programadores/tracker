@@ -70,7 +70,7 @@ if __name__ == "__main__":
 
     tracker = Tracker()
     track = tracker.update_and_save_users_to_db
-    schedule.every(30).minutes.do(track)
+    schedule.every(2).minutes.do(track)
 
     while True:
         schedule.run_pending()
