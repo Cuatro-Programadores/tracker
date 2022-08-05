@@ -82,10 +82,10 @@ class Notificator():
 
 
 if __name__ == "__main__":
-    # notificator = Notificator()
+    notificator = Notificator()
     # # msg = "hello"
-    # notificator.send_notification(
-    #     4253952789, "VERIZON", "Desired price of $300 found for your item 'TV' at:\n https://www.target.com/", "")
+    notificator.send_notification(
+        9079572741, "ATT", "Desired price of $300 found for your item 'TV' at:\n https://www.target.com/", "")
 
     # print(notificator.shorten_link(
     #     "https://www.amazon.com/APC-Battery-Protector-BackUPS-BX1500M/dp/B06VY6FXMM?ref_=Oct_DLandingS_D_d1d1e0d6_60&smid=ATVPDKIKX0DER&th=1"))

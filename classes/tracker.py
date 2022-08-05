@@ -48,8 +48,9 @@ class Tracker():
                         if product["is_product_being_tracked"] == True:
                             self.notificator.send_notification(
                                 user["phone_number"], user["cell_carrier"], notification_message, specific_product_url)
-                            print(f"Text out to {user_email}")
                             product["is_product_being_tracked"] = False
+                            print(f"Text out to {user_email}")
+                            time.sleep(2)
                     if specific_product["website"] == "Amazon":
                         scrape_attempt = self.scraper.scrape_amazon(
                             specific_product["url"])
@@ -76,7 +77,7 @@ if __name__ == "__main__":
 
     tracker = Tracker()
     track = tracker.update_and_save_users_to_db
-    schedule.every(5).seconds.do(track)
+    schedule.every(10).seconds.do(track)
 
     while True:
         schedule.run_pending()
