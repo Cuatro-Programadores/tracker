@@ -38,19 +38,23 @@ class Tracker():
                 product_name = product["name"]
                 for specific_product in product["specific_product_list"]:
 
-                    specific_product_website = specific_product["website"]
-                    # specific_product_url = specific_product["url"]
+                    # specific_product_website = specific_product["website"]
+                    specific_product_url = specific_product["url"]
                     specific_product_price = float(specific_product["price"])
-                    notification_message = f"Desired price of ${target_price} found for your item '{product_name}' at {specific_product_website}.com, go check it out!"
+                    notification_message = f"Desired price of ${target_price} found for your item '{product_name}' at:\n"
 
                     if specific_product_price <= target_price:
                         if product["is_product_being_tracked"] == True:
                             self.notificator.send_notification(
-                                user["phone_number"], user["cell_carrier"], notification_message)
+                                user["phone_number"], user["cell_carrier"], notification_message, specific_product_url)
                             product["is_product_being_tracked"] = False
                     if specific_product["website"] == "Amazon":
-                        specific_product["price"] = self.scraper.scrape_amazon(
+                        scrape_attempt = self.scraper.scrape_amazon(
                             specific_product["url"])
+                        if scrape_attempt != 999999:
+                            specific_product["price"] = scrape_attempt
+                        else:
+                            continue
 
                     if specific_product["website"] == "Target":
                         specific_product["price"] = self.scraper.scrape_target(
@@ -70,7 +74,7 @@ if __name__ == "__main__":
 
     tracker = Tracker()
     track = tracker.update_and_save_users_to_db
-    schedule.every(2).minutes.do(track)
+    schedule.every(5).seconds.do(track)
 
     while True:
         schedule.run_pending()
