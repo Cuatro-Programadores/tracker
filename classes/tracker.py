@@ -47,7 +47,7 @@ class Tracker():
                     if specific_product_price <= target_price:
                         if product["is_product_being_tracked"] == True:
                             self.notificator.send_notification(
-                                user["phone_number"], user["cell_carrier"], notification_message, specific_product_url)
+                                user["phone_number"], notification_message, specific_product_url)
                             product["is_product_being_tracked"] = False
                             print(f"Text out to {user_email}")
                             time.sleep(2)
