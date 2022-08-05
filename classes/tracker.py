@@ -42,11 +42,13 @@ class Tracker():
                     specific_product_url = specific_product["url"]
                     specific_product_price = float(specific_product["price"])
                     notification_message = f"Desired price of ${target_price} found for your item '{product_name}' at:\n"
+                    user_email = user["email"]
 
                     if specific_product_price <= target_price:
                         if product["is_product_being_tracked"] == True:
                             self.notificator.send_notification(
                                 user["phone_number"], user["cell_carrier"], notification_message, specific_product_url)
+                            print(f"Text out to {user_email}")
                             product["is_product_being_tracked"] = False
                     if specific_product["website"] == "Amazon":
                         scrape_attempt = self.scraper.scrape_amazon(
