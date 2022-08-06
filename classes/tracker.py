@@ -5,7 +5,7 @@ import os
 from pymongo import MongoClient
 from bson.json_util import dumps, loads
 from scraper import Scraper
-from notificator import Notificator
+from notifier import Notifier
 
 dotenv.load_dotenv(dotenv.find_dotenv())
 
@@ -18,7 +18,7 @@ class Tracker():
         self.connection = MongoClient(
             f"mongodb+srv://mypricescout:{password}@my-price-scout-users.yugh3.mongodb.net/?retryWrites=true&w=majority")
         self.scraper = Scraper()
-        self.notificator = Notificator()
+        self.notificator = Notifier()
 
     def get_all_users(self):
 
@@ -33,12 +33,13 @@ class Tracker():
         user_list = self.get_all_users()
 
         for user in user_list:
+
             for product in user["watchlist"]:
                 target_price = float(product["target_price"])
                 product_name = product["name"]
+
                 for specific_product in product["specific_product_list"]:
 
-                    # specific_product_website = specific_product["website"]
                     specific_product_url = specific_product["url"]
                     specific_product_price = float(specific_product["price"])
                     notification_message = f"Desired price of ${target_price} found for your item '{product_name}' at:\n"
@@ -51,6 +52,7 @@ class Tracker():
                             product["is_product_being_tracked"] = False
                             print(f"Text out to {user_email}")
                             time.sleep(2)
+
                     if specific_product["website"] == "Amazon":
                         scrape_attempt = self.scraper.scrape_amazon(
                             specific_product["url"])
@@ -77,7 +79,7 @@ if __name__ == "__main__":
 
     tracker = Tracker()
     track = tracker.update_and_save_users_to_db
-    schedule.every(10).seconds.do(track)
+    schedule.every(15).minutes.do(track)
 
     while True:
         schedule.run_pending()
