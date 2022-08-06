@@ -102,8 +102,4 @@ class Notificator():
 
 
 if __name__ == "__main__":
-    notificator = Notificator()
-
-    # # # msg = "hello"
-    notificator.send_notification(
-        2026434959, "Desired price of $300 found for your item 'TV' at:\n ", "https://www.target.com/p/ring-1080p-wireless-video-doorbell/-/A-86510296?preselect=81909790#lnk=sametab")
+    pass
